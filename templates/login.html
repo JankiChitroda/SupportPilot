@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SupportPilot – AI Ticket Resolution Agent | Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .custom-shadow {
+      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.07), 0 0 1px 1px rgba(15, 23, 42, 0.05);
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAFC] min-h-screen w-full flex items-center justify-center p-6 text-[#0F172A] antialiased selection:bg-blue-100 selection:text-blue-900">
+
+  <!-- Main Login Card Container -->
+  <main class="w-full max-w-[460px] bg-white rounded-2xl p-10 border border-[#E2E8F0] custom-shadow transition-all duration-200">
+    
+    <!-- Website Name at the top of the card -->
+    <div class="flex items-center justify-center gap-2.5 mb-8">
+      <img src="https://lh3.googleusercontent.com/aida/AEtjO1V3_qYM9UE5h-xrX9ItBC4tPNKGahJNlKXiYXnWsnEDSFq-QSQHIoyPP3XZ2Xp5tgxWU1iJaML_bWfKhFxSs7Ku9g9PgC2mvE69viCFWYthCRhTODB6XoZk4HHn06GYUwsF9okcm4HlPVJr-GBiMDahBV2q8uW-Opz-ZQ_x1CGHQp4PRkD32jvRm3Uc1Q0vt1EATPsM9lKqcrk-y4XR02HCTFimStIvDRT4bfYtHR9EcVanImWlh3Undo0" alt="SupportPilot Logo" class="w-7 h-7 object-contain rounded-lg">
+      <span class="text-sm font-semibold tracking-tight text-[#0F172A]">
+        SupportPilot – AI Ticket Resolution Agent
+      </span>
+    </div>
+
+    <!-- Heading: Login -->
+    <h1 class="text-2xl font-bold tracking-tight text-[#0F172A] text-center mb-6">
+      Login
+    </h1>
+
+    <!-- Display Backend Error Message if present -->
+    {% if error %}
+    <div class="mb-5 p-3 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium text-center">
+      {{ error }}
+    </div>
+    {% endif %}
+
+    <!-- Form -->
+    <form id="loginForm" method="POST" action="{{ url_for('login') }}" novalidate class="space-y-5">
+      
+      <!-- Email Field (Fixed name attribute to match Flask backend) -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-[#334155] mb-1.5">
+          Email Address
+        </label>
+        <div class="relative">
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            placeholder="Enter your registered email" 
+            autocomplete="email"
+            class="w-full px-3.5 py-2.5 text-sm rounded-lg border border-[#CBD5E1] bg-white text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] transition-colors"
+            required
+          />
+        </div>
+        <p id="nameError" class="hidden text-xs text-[#DC2626] mt-1.5 font-medium flex items-center gap-1">
+          <svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+          Valid email is required.
+        </p>
+      </div>
+
+      <!-- Password Field -->
+      <div>
+        <label for="userPassword" class="block text-sm font-medium text-[#334155] mb-1.5">
+          Password
+        </label>
+        <div class="relative">
+          <input 
+            type="password" 
+            id="userPassword" 
+            name="password"
+            placeholder="Enter your password" 
+            autocomplete="current-password"
+            class="w-full pl-3.5 pr-10 py-2.5 text-sm rounded-lg border border-[#CBD5E1] bg-white text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] transition-colors"
+            required
+          />
+          <!-- Password Visibility Icon Toggle -->
+          <button 
+            type="button" 
+            id="togglePassword" 
+            class="absolute inset-y-0 right-0 pr-3 flex items-center text-[#94A3B8] hover:text-[#475569] transition-colors focus:outline-none"
+            aria-label="Toggle password visibility"
+          >
+            <!-- Eye icon (default: password hidden) -->
+            <svg id="eyeIcon" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            <!-- Eye slash icon (hidden initially) -->
+            <svg id="eyeSlashIcon" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />
+            </svg>
+          </button>
+        </div>
+        <p id="passwordError" class="hidden text-xs text-[#DC2626] mt-1.5 font-medium flex items-center gap-1">
+          <svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+          Password is required.
+        </p>
+      </div>
+
+      <!-- Primary Login Button -->
+      <div class="pt-2">
+        <button 
+          type="submit" 
+          id="loginBtn" 
+          disabled
+          class="w-full py-2.5 px-4 bg-[#2563EB] hover:bg-[#1D4ED8] disabled:bg-[#93C5FD] disabled:cursor-not-allowed text-white text-sm font-semibold rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#2563EB]/40 focus:ring-offset-2"
+        >
+          Login
+        </button>
+      </div>
+
+      <!-- Divider with text OR -->
+      <div class="relative py-2 flex items-center justify-center">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-[#E2E8F0]"></div>
+        </div>
+        <div class="relative px-3 bg-white text-xs uppercase font-medium text-[#94A3B8]">
+          OR
+        </div>
+      </div>
+
+      <!-- Secondary Button: Login with Google -->
+      <button 
+        type="button" 
+        id="googleBtn"
+        class="w-full py-2.5 px-4 bg-white hover:bg-[#F8FAFC] text-[#334155] hover:text-[#0F172A] border border-[#CBD5E1] hover:border-[#94A3B8] text-sm font-semibold rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2.5 focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24">
+          <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.1 9 5 12 5z"/>
+          <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/>
+          <path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.8s.2-2.1.4-2.8L1.9 6.3C.7 8.7 0 10.3 0 12s.7 3.3 1.9 5.7l3.7-2.9z"/>
+          <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.1-6.4-5.2L1.9 16c1.8 3.7 5.6 7 10.1 7z"/>
+        </svg>
+        <span>Login with Google</span>
+      </button>
+
+    </form>
+
+    <!-- Register Link Footer -->
+    <div class="mt-6 text-center">
+      <p class="text-sm text-slate-600">
+        Don't have an account? 
+        <a href="{{ url_for('register') }}" class="text-blue-600 font-medium hover:text-blue-700 hover:underline transition-colors ml-1">Create Account</a>
+      </p>
+    </div>
+
+  </main>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('userPassword');
+    const loginBtn = document.getElementById('loginBtn');
+    const nameError = document.getElementById('nameError');
+    const passwordError = document.getElementById('passwordError');
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    const eyeIcon = document.getElementById('eyeIcon');
+    const eyeSlashIcon = document.getElementById('eyeSlashIcon');
+
+    // Toggle Password Visibility
+    togglePasswordBtn.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      eyeIcon.classList.toggle('hidden', isPassword);
+      eyeSlashIcon.classList.toggle('hidden', !isPassword);
+    });
+
+    // Check button state on input
+    function updateButtonState() {
+      const isEmailFilled = emailInput.value.trim().length > 0;
+      const isPassFilled = passwordInput.value.trim().length > 0;
+      
+      if (isEmailFilled && isPassFilled) {
+        loginBtn.disabled = false;
+      } else {
+        loginBtn.disabled = true;
+      }
+
+      // Hide errors once typing
+      if (isEmailFilled) {
+        nameError.classList.add('hidden');
+        emailInput.classList.remove('border-[#DC2626]', 'focus:border-[#DC2626]', 'focus:ring-[#DC2626]/20');
+      }
+      if (isPassFilled) {
+        passwordError.classList.add('hidden');
+        passwordInput.classList.remove('border-[#DC2626]', 'focus:border-[#DC2626]', 'focus:ring-[#DC2626]/20');
+      }
+    }
+
+    emailInput.addEventListener('input', updateButtonState);
+    passwordInput.addEventListener('input', updateButtonState);
+
+    // Form submission validation
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let hasError = false;
+
+      if (!emailInput.value.trim()) {
+        nameError.classList.remove('hidden');
+        emailInput.classList.add('border-[#DC2626]', 'focus:border-[#DC2626]', 'focus:ring-[#DC2626]/20');
+        hasError = true;
+      }
+
+      if (!passwordInput.value.trim()) {
+        passwordError.classList.remove('hidden');
+        passwordInput.classList.add('border-[#DC2626]', 'focus:border-[#DC2626]', 'focus:ring-[#DC2626]/20');
+        hasError = true;
+      }
+
+      if (!hasError) {
+        // Success state & loading spinner
+        loginBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg> Logging in...
+        `;
+        loginBtn.disabled = true;
+
+        // Submit form data to Flask backend after a brief spinner animation
+        setTimeout(() => {
+          form.submit();
+        }, 800);
+      }
+    });
+  </script>
+</body>
+</html>

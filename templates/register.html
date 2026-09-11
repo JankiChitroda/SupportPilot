@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SupportPilot – AI Ticket Resolution Agent | Register</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            navy: {
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+    }
+    .card-shadow {
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 10px -6px rgba(15, 23, 42, 0.02);
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+    .input-error {
+      border-color: #ef4444 !important;
+    }
+    .input-error:focus {
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#f8fafc] text-navy-900 flex items-center justify-center p-6 sm:p-8 antialiased selection:bg-blue-100 selection:text-blue-900">
+
+  <!-- Success Notification Toast (Hidden by default) -->
+  <div id="toastNotification" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-5 py-3.5 bg-emerald-600 text-white rounded-xl shadow-lg transform -translate-y-12 opacity-0 transition-all duration-300 pointer-events-none">
+    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+    </svg>
+    <div>
+      <p class="font-medium text-sm text-white">Account created successfully.</p>
+      <p class="text-xs text-emerald-100">Redirecting to SupportPilot Dashboard (Milestone 1)...</p>
+    </div>
+  </div>
+
+  <!-- Registration Container Card -->
+  <main class="w-full max-w-[480px] bg-white rounded-2xl border border-slate-200/80 p-8 sm:p-9 card-shadow relative my-8">
+
+    <!-- Brand Header (Strictly Website Name & Logo only) -->
+    <header class="flex items-center justify-center gap-2.5 mb-6">
+      <div class="w-6 h-6 flex-shrink-0">
+        <img src="https://lh3.googleusercontent.com/aida/AEtjO1XSbYDrVNOpWxdwXyssfYZ_z8VsHMaAhwXDwH2y38fDqoMYlJupzF_ZjwU9tSQ3YTtEvsa-np1Yh1fL__f0_WjD4ShGGos2ylntDqeHXpTxgvEq34OxjXcQoWL-vJ_EX3S43zHykXxCZ-eQ-thvzFSdvwzztOpEPZNl5kdmWYWZBc8JDPdwtapc_6-x5vbgDw9BlynkdAi2rAikPKqlvoCo8FQwvzWMwebg120haaVxvIE_P4j-FUayh1I" alt="SupportPilot Logo" class="w-full h-full object-contain">
+      </div>
+      <span class="font-medium text-[15px] tracking-tight text-navy-800">SupportPilot – AI Ticket Resolution Agent</span>
+    </header>
+
+    <!-- Page Title -->
+    <div class="text-center mb-6">
+      <h1 class="text-2xl font-bold text-navy-900 tracking-tight">Create Account</h1>
+    </div>
+
+    <!-- Registration Form -->
+    <form id="registrationForm" action="{{ url_for('register') }}" method="POST" class="space-y-4" novalidate>
+      
+      <!-- Full Name Field -->
+      <div>
+        <label for="fullName" class="block text-sm font-medium text-navy-800 mb-1.5">Full Name</label>
+        <input 
+          type="text" 
+          id="fullName" 
+          name="fullName" 
+          placeholder="Enter your full name" 
+          class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-navy-900 placeholder-slate-400 transition-colors"
+          autocomplete="name"
+          required
+        >
+        <p id="fullNameError" class="text-xs text-red-500 mt-1.5 hidden font-medium flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+          <span>Name is required.</span>
+        </p>
+      </div>
+
+      <!-- Email Field -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-navy-800 mb-1.5">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          placeholder="Enter your email" 
+          class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-navy-900 placeholder-slate-400 transition-colors"
+          autocomplete="email"
+          required
+        >
+        <p id="emailError" class="text-xs text-red-500 mt-1.5 hidden font-medium flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+          <span>Valid email is required.</span>
+        </p>
+      </div>
+
+      <!-- Department Field -->
+      <div>
+        <label for="department" class="block text-sm font-medium text-navy-800 mb-1.5">Department</label>
+        <div class="relative">
+          <select 
+            id="department" 
+            name="department" 
+            class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-navy-900 transition-colors appearance-none pr-10 cursor-pointer"
+            required
+          >
+            <option value="" disabled selected class="text-slate-400">Select department</option>
+            <option value="IT">IT</option>
+            <option value="HR">HR</option>
+            <option value="Finance">Finance</option>
+            <option value="Sales">Sales</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Operations">Operations</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-slate-500">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+        </div>
+        <p id="departmentError" class="text-xs text-red-500 mt-1.5 hidden font-medium flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+          <span>Please select a department.</span>
+        </p>
+      </div>
+
+      <!-- Password Field -->
+      <div>
+        <label for="password" class="block text-sm font-medium text-navy-800 mb-1.5">Password</label>
+        <div class="relative">
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            placeholder="Create a password" 
+            class="w-full pl-3.5 pr-10 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-navy-900 placeholder-slate-400 transition-colors"
+            autocomplete="new-password"
+            required
+          >
+          <button 
+            type="button" 
+            id="togglePasswordBtn" 
+            class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-navy-700 transition-colors focus:outline-none"
+            aria-label="Toggle password visibility"
+          >
+            <!-- Eye icon -->
+            <svg id="eyeIcon1" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+            <!-- Eye Slash icon -->
+            <svg id="eyeSlashIcon1" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Password Strength Indicator -->
+        <div id="passwordStrengthContainer" class="mt-2 space-y-1">
+          <div class="flex items-center justify-between text-[11px] font-medium text-slate-500">
+            <span>Password strength:</span>
+            <span id="strengthText" class="font-semibold text-slate-400">—</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1.5 h-1.5 w-full bg-slate-100 rounded-full overflow-hidden p-0.5">
+            <div id="bar1" class="h-full rounded-full bg-slate-200 transition-colors duration-300"></div>
+            <div id="bar2" class="h-full rounded-full bg-slate-200 transition-colors duration-300"></div>
+            <div id="bar3" class="h-full rounded-full bg-slate-200 transition-colors duration-300"></div>
+          </div>
+        </div>
+
+        <p id="passwordError" class="text-xs text-red-500 mt-1.5 hidden font-medium flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+          <span>Password is required.</span>
+        </p>
+      </div>
+
+      <!-- Confirm Password Field -->
+      <div>
+        <label for="confirmPassword" class="block text-sm font-medium text-navy-800 mb-1.5">Confirm Password</label>
+        <div class="relative">
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            name="confirmPassword" 
+            placeholder="Confirm your password" 
+            class="w-full pl-3.5 pr-10 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-navy-900 placeholder-slate-400 transition-colors"
+            autocomplete="new-password"
+            required
+          >
+          <button 
+            type="button" 
+            id="toggleConfirmPasswordBtn" 
+            class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-navy-700 transition-colors focus:outline-none"
+            aria-label="Toggle confirm password visibility"
+          >
+            <!-- Eye icon -->
+            <svg id="eyeIcon2" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+            <!-- Eye Slash icon -->
+            <svg id="eyeSlashIcon2" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/>
+            </svg>
+          </button>
+        </div>
+        <p id="confirmPasswordError" class="text-xs text-red-500 mt-1.5 hidden font-medium flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+          <span>Passwords do not match.</span>
+        </p>
+      </div>
+
+      <!-- Primary Action: Create Account Button -->
+      <div class="pt-2">
+        <button 
+          type="submit" 
+          id="submitBtn" 
+          disabled
+          class="w-full py-2.5 px-4 bg-[#8ec0f9] text-white font-medium rounded-lg text-sm transition-all duration-200 cursor-not-allowed flex items-center justify-center gap-2 shadow-sm"
+        >
+          <span>Create Account</span>
+        </button>
+      </div>
+
+      <!-- Divider OR -->
+      <div class="relative flex py-2 items-center">
+        <div class="flex-grow border-t border-slate-200"></div>
+        <span class="flex-shrink mx-3 text-xs font-medium text-slate-400 uppercase tracking-wider">OR</span>
+        <div class="flex-grow border-t border-slate-200"></div>
+      </div>
+
+      <!-- Secondary Action: Sign up with Google -->
+      <div>
+        <button 
+          type="button" 
+          id="googleSignupBtn"
+          class="w-full py-2.5 px-4 bg-white hover:bg-slate-50 border border-slate-200 text-navy-800 font-medium rounded-lg text-sm flex items-center justify-center gap-2.5 transition-colors duration-150 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-200"
+        >
+          <!-- Official Google "G" Icon -->
+          <svg class="w-4 h-4" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.36 24 12 24z"/>
+            <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.36 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+          </svg>
+          <span>Sign up with Google</span>
+        </button>
+      </div>
+
+    </form>
+
+    <!-- Login Navigation Footer Link -->
+    <div class="mt-6 text-center">
+      <p class="text-sm text-slate-600">
+        Already have an account? 
+        <a href="{{ url_for('login') }}" id="loginLink" class="text-blue-600 font-medium hover:text-blue-700 hover:underline transition-colors ml-1">Login</a>
+      </p>
+    </div>
+
+  </main>
+
+  <script>
+    // Elements
+    const form = document.getElementById('registrationForm');
+    const fullNameInput = document.getElementById('fullName');
+    const emailInput = document.getElementById('email');
+    const departmentSelect = document.getElementById('department');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    // Error elements
+    const fullNameError = document.getElementById('fullNameError');
+    const emailError = document.getElementById('emailError');
+    const departmentError = document.getElementById('departmentError');
+    const passwordError = document.getElementById('passwordError');
+    const confirmPasswordError = document.getElementById('confirmPasswordError');
+
+    // Password strength elements
+    const strengthText = document.getElementById('strengthText');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+
+    // Password visibility toggles
+    const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+    const eyeIcon1 = document.getElementById('eyeIcon1');
+    const eyeSlashIcon1 = document.getElementById('eyeSlashIcon1');
+
+    const toggleConfirmPasswordBtn = document.getElementById('toggleConfirmPasswordBtn');
+    const eyeIcon2 = document.getElementById('eyeIcon2');
+    const eyeSlashIcon2 = document.getElementById('eyeSlashIcon2');
+
+    const toast = document.getElementById('toastNotification');
+
+    // Password Visibility Handler
+    togglePasswordBtn.addEventListener('click', () => {
+      const type = passwordInput.type === 'password' ? 'text' : 'password';
+      passwordInput.type = type;
+      eyeIcon1.classList.toggle('hidden');
+      eyeSlashIcon1.classList.toggle('hidden');
+    });
+
+    toggleConfirmPasswordBtn.addEventListener('click', () => {
+      const type = confirmPasswordInput.type === 'password' ? 'text' : 'password';
+      confirmPasswordInput.type = type;
+      eyeIcon2.classList.toggle('hidden');
+      eyeSlashIcon2.classList.toggle('hidden');
+    });
+
+    // Email validation regex
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+    }
+
+    // Password strength calculator
+    function evaluatePasswordStrength(pwd) {
+      if (!pwd) return 0;
+      let score = 0;
+      if (pwd.length >= 6) score++;
+      if (pwd.length >= 8 && /[A-Z]/.test(pwd) && /[0-9]/.test(pwd)) score++;
+      if (pwd.length >= 10 && /[^A-Za-z0-9]/.test(pwd)) score++;
+      return Math.min(score, 3);
+    }
+
+    function updateStrengthIndicator(pwd) {
+      const strength = evaluatePasswordStrength(pwd);
+      
+      bar1.className = 'h-full rounded-full bg-slate-200 transition-colors duration-300';
+      bar2.className = 'h-full rounded-full bg-slate-200 transition-colors duration-300';
+      bar3.className = 'h-full rounded-full bg-slate-200 transition-colors duration-300';
+
+      if (!pwd) {
+        strengthText.textContent = '—';
+        strengthText.className = 'font-semibold text-slate-400';
+      } else if (strength <= 1) {
+        strengthText.textContent = 'Weak';
+        strengthText.className = 'font-semibold text-rose-500';
+        bar1.classList.remove('bg-slate-200');
+        bar1.classList.add('bg-rose-500');
+      } else if (strength === 2) {
+        strengthText.textContent = 'Medium';
+        strengthText.className = 'font-semibold text-amber-500';
+        bar1.classList.remove('bg-slate-200');
+        bar2.classList.remove('bg-slate-200');
+        bar1.classList.add('bg-amber-500');
+        bar2.classList.add('bg-amber-500');
+      } else {
+        strengthText.textContent = 'Strong';
+        strengthText.className = 'font-semibold text-emerald-500';
+        bar1.classList.remove('bg-slate-200');
+        bar2.classList.remove('bg-slate-200');
+        bar3.classList.remove('bg-slate-200');
+        bar1.classList.add('bg-emerald-500');
+        bar2.classList.add('bg-emerald-500');
+        bar3.classList.add('bg-emerald-500');
+      }
+    }
+
+    // Real-time Form Validation & State
+    function validateInputs() {
+      const isNameValid = fullNameInput.value.trim().length > 0;
+      const isEmailValid = isValidEmail(emailInput.value);
+      const isDeptValid = departmentSelect.value !== '';
+      const isPwdFilled = passwordInput.value.length >= 6;
+      const isConfirmValid = confirmPasswordInput.value.length > 0 && confirmPasswordInput.value === passwordInput.value;
+
+      const isAllValid = isNameValid && isEmailValid && isDeptValid && isPwdFilled && isConfirmValid;
+
+      if (isAllValid) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('cursor-not-allowed', 'bg-[#8ec0f9]');
+        submitBtn.classList.add('bg-blue-600', 'hover:bg-blue-700', 'cursor-pointer', 'shadow-md');
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('cursor-not-allowed', 'bg-[#8ec0f9]');
+        submitBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700', 'cursor-pointer', 'shadow-md');
+      }
+
+      return isAllValid;
+    }
+
+    fullNameInput.addEventListener('input', () => {
+      fullNameError.classList.add('hidden');
+      fullNameInput.classList.remove('input-error');
+      validateInputs();
+    });
+
+    emailInput.addEventListener('input', () => {
+      emailError.classList.add('hidden');
+      emailInput.classList.remove('input-error');
+      validateInputs();
+    });
+
+    departmentSelect.addEventListener('change', () => {
+      departmentError.classList.add('hidden');
+      departmentSelect.classList.remove('input-error');
+      validateInputs();
+    });
+
+    passwordInput.addEventListener('input', () => {
+      passwordError.classList.add('hidden');
+      passwordInput.classList.remove('input-error');
+      updateStrengthIndicator(passwordInput.value);
+      if (confirmPasswordInput.value) {
+        if (confirmPasswordInput.value !== passwordInput.value) {
+          confirmPasswordError.classList.remove('hidden');
+          confirmPasswordInput.classList.add('input-error');
+        } else {
+          confirmPasswordError.classList.add('hidden');
+          confirmPasswordInput.classList.remove('input-error');
+        }
+      }
+      validateInputs();
+    });
+
+    confirmPasswordInput.addEventListener('input', () => {
+      if (confirmPasswordInput.value !== passwordInput.value) {
+        confirmPasswordError.classList.remove('hidden');
+        confirmPasswordInput.classList.add('input-error');
+      } else {
+        confirmPasswordError.classList.add('hidden');
+        confirmPasswordInput.classList.remove('input-error');
+      }
+      validateInputs();
+    });
+
+    // Form Submission
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      let hasError = false;
+
+      if (!fullNameInput.value.trim()) {
+        fullNameError.classList.remove('hidden');
+        fullNameInput.classList.add('input-error');
+        hasError = true;
+      }
+
+      if (!isValidEmail(emailInput.value)) {
+        emailError.classList.remove('hidden');
+        emailInput.classList.add('input-error');
+        hasError = true;
+      }
+
+      if (!departmentSelect.value) {
+        departmentError.classList.add('hidden');
+        departmentSelect.classList.add('input-error');
+        hasError = true;
+      }
+
+      if (!passwordInput.value) {
+        passwordError.classList.remove('hidden');
+        passwordInput.classList.add('input-error');
+        hasError = true;
+      }
+
+      if (!confirmPasswordInput.value || confirmPasswordInput.value !== passwordInput.value) {
+        confirmPasswordError.classList.remove('hidden');
+        confirmPasswordInput.classList.add('input-error');
+        hasError = true;
+      }
+
+      if (hasError) return;
+
+      // Success State Flow
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Creating Account...</span>
+      `;
+
+      // Show toast notification
+      toast.classList.remove('-translate-y-12', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      // Submit data to Flask backend route
+      setTimeout(() => {
+        submitBtn.innerHTML = `<span>Redirecting...</span>`;
+        form.submit(); // Submits data to Python/SQLite backend
+      }, 1500);
+    });
+  </script>
+  
+</body>
+</html>

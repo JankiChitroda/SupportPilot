@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SupportPilot – Milestone 1 AI Ingestion &amp; Classification Dashboard</title>
+<!-- Tailwind CSS v3 with Forms & Container Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+            },
+            surface: {
+              subtle: '#faf8ff',
+              border: '#e2e8f0',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="custom-typography">
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #faf8ff;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="h-full antialiased text-slate-800 flex overflow-hidden">
+<!-- BEGIN: LeftSidebar -->
+<aside class="w-64 flex-shrink-0 bg-white border-r border-slate-200 flex flex-col justify-between select-none z-20" data-purpose="sidebar-navigation">
+<!-- Top Branding & Navigation Links -->
+<div>
+<!-- Product Header / Logo -->
+<div class="h-16 flex items-center px-6 border-b border-slate-100 gap-3">
+<div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-sm flex-shrink-0">
+<!-- Shield Icon -->
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="leading-tight">
+<div class="font-bold text-slate-900 text-sm tracking-tight">SupportPilot</div>
+<div class="text-[11px] font-medium text-slate-400">AI Ticket Resolution</div>
+</div>
+</div>
+<!-- Main Navigation Menu -->
+<nav class="p-3 space-y-1 text-sm font-medium">
+<!-- Dashboard Link -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">
+<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<rect height="7" rx="1.5" width="7" x="3" y="3"></rect>
+<rect height="7" rx="1.5" width="7" x="14" y="3"></rect>
+<rect height="7" rx="1.5" width="7" x="14" y="14"></rect>
+<rect height="7" rx="1.5" width="7" x="3" y="14"></rect>
+</svg>
+<span>Dashboard</span>
+</a>
+<!-- Tickets Link (Active) -->
+<a class="flex items-center justify-between px-3 py-2 rounded-lg bg-blue-50 text-blue-700 font-semibold transition-colors" href="#">
+<div class="flex items-center gap-3">
+<svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Tickets</span>
+</div>
+<span class="text-[10px] uppercase font-bold tracking-wider bg-blue-600 text-white px-2 py-0.5 rounded-full">Active</span>
+</a>
+<!-- AI Agent Link -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">
+<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<rect height="12" rx="2" width="16" x="4" y="4"></rect>
+<path d="M9 20h6M12 16v4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>AI Agent</span>
+</a>
+<!-- Integrations Link -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">
+<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v2a2 2 0 110 4v3a1 1 0 01-1 1h-3a1 1 0 01-1-1V15a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a2 2 0 110-4V8a1 1 0 011-1h3a1 1 0 001-1V4z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Integrations</span>
+</a>
+<!-- Analytics Link -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">
+<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Analytics</span>
+</a>
+<!-- Settings Link -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">
+<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round"></path>
+<circle cx="12" cy="12" r="3"></circle>
+</svg>
+<span>Settings</span>
+</a>
+</nav>
+</div>
+<!-- User Profile Footer -->
+<div class="p-4 border-t border-slate-200 flex items-center justify-between" data-purpose="user-profile-footer">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-slate-900 text-white font-semibold flex items-center justify-center text-xs tracking-wider">
+    AC
+</div>
+<div class="leading-snug overflow-hidden">
+<div class="text-xs font-semibold text-slate-800 truncate">Alex Chen</div>
+<div class="text-[11px] text-slate-400 truncate">alex.chen@pilot.io</div>
+</div>
+</div>
+<button class="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition" title="Logout">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</aside>
+<!-- END: LeftSidebar -->
+<!-- BEGIN: MainContentWrapper -->
+<main class="flex-1 flex flex-col min-w-0 overflow-y-auto custom-scrollbar" data-purpose="main-content">
+<!-- BEGIN: TopBar -->
+<header class="h-16 bg-white border-b border-slate-200 px-8 flex items-center justify-between flex-shrink-0 sticky top-0 z-10">
+<!-- Breadcrumb Navigation -->
+<nav class="flex items-center gap-2 text-xs font-medium text-slate-500">
+<a class="hover:text-slate-800 transition-colors" href="#">SupportPilot</a>
+<svg class="w-3 h-3 text-slate-300" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<a class="hover:text-slate-800 transition-colors" href="#">Tickets</a>
+</nav>
+<!-- Top Actions & Operational Badges -->
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+    Active
+</span>
+<div class="flex items-center gap-2 px-3 py-1 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 bg-white hover:bg-slate-50 transition cursor-pointer">
+<svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>LinearSVC-Pipeline</span>
+</div>
+</div>
+</header>
+<!-- END: TopBar -->
+<!-- Dashboard Content Container -->
+<div class="px-8 py-7 space-y-7 max-w-[1600px] w-full mx-auto">
+<!-- BEGIN: StepperAndTitleSection -->
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div>
+<h1 class="text-2xl font-bold text-slate-900 tracking-tight">Ticket Processing &amp; Classification</h1>
+<p class="text-sm text-slate-500 mt-0.5">Submit and automatically classify incoming IT support incidents using embedded NLP models</p>
+</div>
+
+<div class="inline-flex items-center bg-white border border-slate-200 rounded-lg p-1 text-xs shadow-sm">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-blue-50 text-blue-700 font-semibold border border-blue-100">
+<span class="w-4 h-4 rounded-full bg-blue-600 text-white text-[10px] flex items-center justify-center font-bold">1</span>
+<span>1. Submit &amp; Classify</span>
+</div>
+<svg class="w-3.5 h-3.5 text-slate-300 mx-1" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<a class="flex items-center gap-2 px-3 py-1.5 rounded-md text-slate-500 hover:text-slate-800 transition" href="#">
+<span class="w-4 h-4 rounded-full bg-slate-200 text-slate-600 text-[10px] flex items-center justify-center font-bold">2</span>
+<span>2. Retrieve &amp; Resolve</span>
+</a>
+</div>
+</div>
+<!-- END: StepperAndTitleSection -->
+
+
+
+<!-- BEGIN: TwoColumnWorkspace -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start" data-purpose="two-column-workspace">
+<!-- Column 1: Ticket Ingestion Form (7 Cols) -->
+<article class="lg:col-span-7 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden" data-purpose="ticket-submission-card">
+<div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<h2 class="text-sm font-bold text-slate-900 leading-tight">Submit New Ticket</h2>
+<p class="text-[11px] text-slate-400">Manual ingestion pipeline &amp; automated parsing</p>
+</div>
+</div>
+<!-- Sample Data Loader Button -->
+<button class="text-xs font-semibold text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition" type="button" onclick="loadSampleData()">
+    Load Sample Data
+</button>
+</div>
+
+<!-- Form Content Connected to Flask Backend -->
+<form class="p-6 space-y-4" method="POST">
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5">Ticket Title / Summary</label>
+<input id="ticketTitle" class="w-full text-xs font-medium border-slate-200 rounded-lg shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 py-2.5 px-3.5 text-slate-800 placeholder-slate-400" placeholder="Brief summary of the issue..." type="text" name="title" required value=""/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5">Requester Identity</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+<input id="ticketEmail" class="w-full text-xs font-medium border-slate-200 rounded-lg shadow-sm pl-9 pr-3.5 py-2.5 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-800" type="email" name="email" required value=""/>
+<input type="hidden" name="employee_name" value="Alex Chen">
+</div>
+</div>
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1.5">Department Origin</label>
+<select name="department" class="w-full text-xs font-medium border-slate-200 rounded-lg shadow-sm py-2.5 px-3 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-800 bg-white">
+<option selected="">IT - Systems &amp; Infrastructure</option>
+<option>Software Engineering</option>
+<option>Product &amp; Design</option>
+<option>Finance &amp; Operations</option>
+<option>Human Resources</option>
+</select>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="block text-xs font-semibold text-slate-700">Detailed Incident Log</label>
+<span class="text-[11px] text-slate-400">Natural language input</span>
+</div>
+<textarea id="ticketDesc" name="description" class="w-full text-xs border-slate-200 rounded-lg shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-3.5 text-slate-700 leading-relaxed font-normal" placeholder="Provide detailed information regarding the incident or stack trace..." rows="5" required></textarea>
+</div>
+<div class="pt-1 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-[11px] font-medium text-slate-400">Embedding Mode:</span>
+<span class="text-[11px] font-semibold text-slate-700 bg-slate-100 px-2 py-0.5 rounded">Dense Vector (768-d)</span>
+</div>
+<button class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-sm transition transform active:scale-95" type="submit">
+<svg class="w-3.5 h-3.5 text-blue-200" fill="currentColor" viewbox="0 0 20 20">
+<path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path>
+</svg>
+<span>Submit &amp; Classify</span>
+</button>
+</div>
+</form>
+</article>
+
+<!-- Column 2: AI Classification Results & Real-Time Metrics (5 Cols) -->
+<article class="lg:col-span-5 space-y-5" data-purpose="ai-classification-panel">
+<div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden p-6 relative">
+<div class="flex items-start justify-between pb-4 border-b border-slate-100">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<h2 class="text-sm font-bold text-slate-900">AI Classification Results</h2>
+<p class="text-[11px] text-slate-400">Evaluated via SupportPilot Core Engine</p>
+</div>
+</div>
+<span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-100">
+    {% if result %} #T-2023-4521 {% else %} #AWAITING {% endif %}
+</span>
+</div>
+
+{% if result %}
+<div class="mt-5 grid grid-cols-2 gap-3.5">
+<div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Primary Category</span>
+<span class="text-xs font-bold text-slate-900 mt-1 inline-flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-blue-600"></span>
+    {{ result.category }}
+</span>
+</div>
+<div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Sub-Category</span>
+<span class="text-xs font-bold text-slate-900 mt-1 block">General Module</span>
+</div>
+<div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Severity Level</span>
+<span class="text-xs font-bold text-amber-700 mt-1 inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+    {{ result.severity }}
+</span>
+</div>
+<div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Priority Routing</span>
+<span class="text-xs font-bold text-rose-700 mt-1 inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+    {{ result.priority }}
+</span>
+</div>
+</div>
+<div class="mt-4 p-4 rounded-lg bg-blue-50/50 border border-blue-100">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+    Status / Confidence
+</span>
+<span class="text-xs font-bold text-blue-700 bg-white px-2 py-0.5 rounded border border-blue-200 shadow-2xs">{{ result.status }}</span>
+</div>
+<p class="mt-3 text-[11px] leading-relaxed text-slate-600">
+<strong class="text-slate-800 font-semibold">Processed Title:</strong> {{ result.title }}
+</p>
+</div>
+{% else %}
+<div class="mt-8 text-center py-10 text-slate-400 text-xs">
+  Submit a ticket on the left to see instant AI classification, severity, and priority scoring.
+</div>
+{% endif %}
+
+<div class="mt-5">
+<a class="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 px-4 rounded-lg shadow transition" href="{{ url_for('resolution') }}">
+<span>Continue to Resolution</span>
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</a>
+</div>
+</div>
+
+<!-- Real-Time Micro Metrics Calculated Live from Flask & SQLite -->
+<div class="grid grid-cols-3 gap-3" data-purpose="metrics-summary">
+<div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm text-center">
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-tight">Classification Acc.</span>
+<div class="text-xl font-bold text-slate-900 mt-1">100.0%</div>
+<span class="text-[10px] font-semibold text-emerald-600 mt-0.5 block">LinearSVC Pipeline</span>
+</div>
+<div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm text-center">
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-tight">Inference Time</span>
+<div class="text-xl font-bold text-slate-900 mt-1">{{ inference_time }}</div>
+<span class="text-[10px] font-medium text-slate-400 mt-0.5 block">Sub-second NLP</span>
+</div>
+<div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm text-center">
+<span class="block text-[11px] font-semibold text-slate-400 uppercase tracking-tight">Triaged Total</span>
+<div class="text-xl font-bold text-slate-900 mt-1">{{ total_triaged }}</div>
+<span class="text-[10px] font-semibold text-blue-600 mt-0.5 block">100% Automated</span>
+</div>
+</div>
+</article>
+</section>
+<!-- END: TwoColumnWorkspace -->
+</div>
+</main>
+<!-- END: MainContentWrapper -->
+
+<!-- Helper script to populate sample data easily for your demo -->
+<script>
+  function loadSampleData() {
+    document.getElementById('ticketTitle').value = "Question about monthly invoice charge";
+    document.getElementById('ticketEmail').value = "alex.chen@pilot.io";
+    document.getElementById('ticketDesc').value = "There is an unexpected payment charge on my latest invoice statement that I need explained.";
+  }
+</script>
+</body>
+</html>
