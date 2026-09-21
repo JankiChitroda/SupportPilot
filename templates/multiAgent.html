@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-surface": "#0b1c30",
+          "on-primary-fixed": "#00174b",
+          "error": "#ba1a1a",
+          "surface-dim": "#cbdbf5",
+          "surface-tint": "#0053db",
+          "inverse-on-surface": "#eaf1ff",
+          "surface-variant": "#d3e4fe",
+          "secondary-fixed": "#dae2fd",
+          "secondary-container": "#dae2fd",
+          "surface-container-high": "#dce9ff",
+          "on-error": "#ffffff",
+          "on-surface-variant": "#434655",
+          "on-tertiary-fixed-variant": "#004b73",
+          "surface-container-highest": "#d3e4fe",
+          "on-tertiary-container": "#e7f2ff",
+          "primary": "#004ac6",
+          "outline-variant": "#c3c6d7",
+          "primary-fixed": "#dbe1ff",
+          "tertiary-fixed": "#cce5ff",
+          "secondary": "#565e74",
+          "on-secondary-container": "#5c647a",
+          "surface": "#f8f9ff",
+          "on-secondary-fixed": "#131b2e",
+          "surface-bright": "#f8f9ff",
+          "tertiary": "#005a89",
+          "on-background": "#0b1c30",
+          "primary-fixed-dim": "#b4c5ff",
+          "on-secondary": "#ffffff",
+          "surface-container": "#e5eeff",
+          "tertiary-fixed-dim": "#93ccff",
+          "on-secondary-fixed-variant": "#3f465c",
+          "on-primary": "#ffffff",
+          "on-tertiary-fixed": "#001d31",
+          "error-container": "#ffdad6",
+          "inverse-primary": "#b4c5ff",
+          "outline": "#737686",
+          "background": "#f8f9ff",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-low": "#eff4ff",
+          "on-error-container": "#93000a",
+          "inverse-surface": "#213145",
+          "on-primary-fixed-variant": "#003ea8",
+          "secondary-fixed-dim": "#bec6e0",
+          "on-tertiary": "#ffffff",
+          "on-primary-container": "#eeefff",
+          "tertiary-container": "#0073ae",
+          "primary-container": "#2563eb"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-xl": "2rem",
+          "gutter-mobile": "1rem",
+          "margin-desktop": "2rem",
+          "space-base": "1rem",
+          "space-xs": "0.25rem",
+          "space-2xl": "2.5rem",
+          "space-sm": "0.5rem",
+          "space-4xl": "4rem",
+          "space-2xs": "0.125rem",
+          "margin-mobile": "1rem",
+          "space-3xl": "3rem",
+          "space-md": "0.75rem",
+          "space-lg": "1.5rem",
+          "gutter-desktop": "1.5rem"
+        },
+        "fontFamily": {
+          "body-sm": [
+            "Inter"
+          ],
+          "headline-lg-mobile": [
+            "Inter"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "headline-md": [
+            "Inter"
+          ],
+          "headline-lg": [
+            "Inter"
+          ],
+          "label-md": [
+            "Inter"
+          ],
+          "headline-sm": [
+            "Inter"
+          ],
+          "caption": [
+            "Inter"
+          ],
+          "display": [
+            "Inter"
+          ],
+          "body-md": [
+            "Inter"
+          ],
+          "label-sm": [
+            "Inter"
+          ],
+          "mono-code": [
+            "JetBrains Mono"
+          ]
+        },
+        "fontSize": {
+          "body-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-lg-mobile": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.005em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-md": [
+            "22px",
+            {
+              "lineHeight": "28px",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "30px",
+            {
+              "lineHeight": "38px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "label-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "0em",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-sm": [
+            "18px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "caption": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.02em",
+              "fontWeight": "500"
+            }
+          ],
+          "display": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "700"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "0em",
+              "fontWeight": "400"
+            }
+          ],
+          "label-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "500"
+            }
+          ],
+          "mono-code": [
+            "12px",
+            {
+              "lineHeight": "18px",
+              "letterSpacing": "0em",
+              "fontWeight": "400"
+            }
+          ]
+        }
+      },
+    },
+  }
+</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"><div class="flex flex-col"><div class="h-16 px-space-base flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary font-headline-sm text-headline-sm font-bold">SP</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface leading-tight tracking-tight">SupportPilot</span><span class="font-caption text-caption text-on-surface-variant leading-none">AI Ticket Resolution</span></div></div><nav class="flex flex-col gap-space-2xs px-space-sm pt-space-md" data-active-classes="bg-primary-container text-on-primary font-label-md text-label-md"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="tickets" href="#"><span class="material-symbols-outlined text-[20px]">confirmation_number</span><span>Tickets</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg transition-colors bg-primary-container text-on-primary font-label-md text-label-md" data-path="ai-agent" href="#"><span class="material-symbols-outlined text-[20px]">smart_toy</span><span>AI Agent</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="integrations" href="#"><span class="material-symbols-outlined text-[20px]">hub</span><span>Integrations</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="analytics" href="#"><span class="material-symbols-outlined text-[20px]">insights</span><span>Analytics</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Settings</span></a></nav></div><div class="p-space-base bg-surface-container-low mx-space-sm mb-space-base rounded-xl flex items-center gap-space-sm"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-on-primary shrink-0 font-label-md text-label-md font-semibold">AC</div><div class="flex flex-col min-w-0 flex-1"><span class="font-label-sm text-label-sm text-on-surface font-semibold truncate">Alex Chen</span><span class="font-caption text-caption text-on-surface-variant truncate">alex.chen@pilot.io</span></div><button class="text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-base"><img alt="Brand logo." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Xvrb0Pt8K9Ti56EQi9oFAfPZoMnh6S6oEEsoCoU00l66pBYclowOq3lkuADHql5d27LuEVTx7tyctlg82vjv4pqwM_5evqALWdQ2arJK5Y3O3eMoou9m7UxXTeVD-a55RXbMgjNh5jvTfEyb1PNN_v0l4rNqFy2HVxz81EeFYpQRPiuHvKlzdARl-Dua-Qd6SXV-eCwkOg8bjeycT53LweO8mvW5CtgI7wB8k21JAYjaTgzR3E34o8RG4"/><div class="hidden md:flex items-center bg-surface-container-low rounded-xl px-space-md py-space-xs gap-space-xs"><span class="material-symbols-outlined text-outline text-[18px]">search</span><input class="bg-transparent border-none outline-none font-body-sm text-body-sm text-on-surface placeholder:text-outline w-64" placeholder="Search incidents, tickets, logs..." type="text"/></div></div><div class="flex items-center gap-space-base"><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-space-2xs bg-surface-container-low rounded-full"><span class="w-2 h-2 rounded-full bg-primary"></span><span class="font-caption text-caption text-primary font-medium">Autonomous Engine Active</span></div><button class="relative p-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full px-space-md lg:px-space-xl py-space-lg space-y-space-xl max-w-[1536px] mx-auto">
+<!-- Top Navigation / Stepper & Header Block -->
+<section class="flex flex-col space-y-space-base">
+<!-- Milestone Progress Stepper -->
+<div class="w-full bg-surface-container-lowest rounded-xl shadow-sm p-space-base flex flex-wrap items-center justify-between gap-space-sm text-label-sm font-label-sm">
+<div class="flex items-center gap-space-sm flex-wrap">
+<!-- Step 1 -->
+<div class="flex items-center gap-space-xs text-secondary">
+<span class="w-5 h-5 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+<span class="font-medium text-on-surface">1. Submit &amp; Classify</span>
+</div>
+<span class="text-outline-variant font-mono-code px-space-2xs text-[10px]">&gt;</span>
+<!-- Step 2 -->
+<div class="flex items-center gap-space-xs text-secondary">
+<span class="w-5 h-5 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+<span class="font-medium text-on-surface">2. Retrieve &amp; Resolve</span>
+</div>
+<span class="text-outline-variant font-mono-code px-space-2xs text-[10px]">&gt;</span>
+<!-- Step 3 (Active) -->
+<div class="flex items-center gap-space-xs bg-primary-fixed text-on-primary-fixed px-space-sm py-space-2xs rounded-full">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-semibold">3. Multi-Agent &amp; Orchestrate (Active)</span>
+</div>
+</div>
+<!-- Live Sync Timestamp -->
+<div class="flex items-center gap-space-xs text-caption font-caption text-secondary">
+<span class="material-symbols-outlined text-[14px]">history</span>
+<span>Run Pipeline #ENG-9421 • Latency stable</span>
+</div>
+</div>
+<!-- Main Title Strip -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-base pt-space-xs">
+<div>
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Multi-Agent Workflows &amp; Integrations</h1>
+</div>
+<p class="font-body-md text-body-md text-secondary mt-space-2xs">Collaborative AI agents and enterprise integrations for autonomous IT resolution</p>
+</div>
+<!-- Top Right Milestone 3 Badge -->
+<div class="self-start md:self-auto flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-bold tracking-wide">MILESTONE 3</span>
+</div>
+</div>
+</section>
+<!-- Two-Column Interactive Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-xl items-start">
+<!-- LEFT COLUMN: Multi-Agent Workflow Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col space-y-space-lg">
+  <form method="POST" action="{{ url_for('milestone3_dashboard') }}" class="flex flex-col space-y-space-lg">
+    
+    <!-- Card Header -->
+    <div class="flex items-center justify-between flex-wrap gap-space-sm pb-space-xs">
+      <div class="flex items-center gap-space-sm">
+        <div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-[20px]">account_tree</span>
+        </div>
+        <div>
+          <h2 class="font-headline-sm text-headline-sm text-on-surface">Multi-Agent Workflow</h2>
+          <p class="font-caption text-caption text-secondary">Dynamic agent delegation pipeline</p>
+        </div>
+      </div>
+      <!-- Status Chip -->
+      <div class="flex items-center gap-space-xs px-space-sm py-space-2xs rounded-full bg-surface-container-low text-primary font-label-sm text-label-sm">
+        <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+        <span class="font-medium">Orchestration Pipeline: Active</span>
+      </div>
+    </div>
+
+    <!-- Interactive Input Fields -->
+    <div class="bg-surface-container-low rounded-xl p-space-md flex flex-col space-y-space-sm">
+      <label class="font-label-md text-label-md text-on-surface font-semibold">Test Ticket Title</label>
+      <input type="text" name="title" placeholder="e.g., VPN Gateway Timeout" required class="w-full bg-surface-container-lowest rounded-lg p-space-sm border border-outline/20 text-body-sm outline-none focus:border-primary" />
+      
+      <label class="font-label-md text-label-md text-on-surface font-semibold">Incident Description</label>
+      <textarea name="description" rows="3" placeholder="Describe the system issue..." required class="w-full bg-surface-container-lowest rounded-lg p-space-sm border border-outline/20 text-body-sm outline-none focus:border-primary"></textarea>
+      
+      <input type="hidden" name="category" value="Technical">
+      <button type="submit" class="mt-space-xs px-space-md py-space-xs rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-medium hover:bg-primary-container transition-all flex items-center justify-center gap-space-xs shadow-sm">
+        <span>Run Multi-Agent Pipeline</span>
+        <span class="material-symbols-outlined text-[16px]">play_arrow</span>
+      </button>
+    </div>
+
+    <!-- Process Diagram Nodes -->
+    <div class="bg-surface-container-low rounded-xl p-space-md relative overflow-hidden">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-space-base items-center relative z-10">
+    <!-- Node 1: Diagnosis -->
+    <div class="flex flex-col items-center text-center space-y-space-xs">
+    <div class="w-12 h-12 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center text-primary group transition-transform hover:scale-105">
+    <span class="material-symbols-outlined text-[22px]">search_check</span>
+    </div>
+    <div class="flex flex-col items-center">
+    <span class="font-label-md text-label-md text-on-surface font-semibold">Diagnosis</span>
+    <span class="mt-space-2xs px-space-xs py-space-2xs rounded-full bg-surface-container text-primary font-caption text-caption font-medium">Active</span>
+    </div>
+    </div>
+    <!-- Node 2: Retrieval -->
+    <div class="flex flex-col items-center text-center space-y-space-xs">
+    <div class="w-12 h-12 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center text-tertiary group transition-transform hover:scale-105">
+    <span class="material-symbols-outlined text-[22px]">database</span>
+    </div>
+    <div class="flex flex-col items-center">
+    <span class="font-label-md text-label-md text-on-surface font-semibold">Retrieval</span>
+    <span class="mt-space-2xs px-space-xs py-space-2xs rounded-full bg-surface-container text-tertiary font-caption text-caption font-medium">Active</span>
+    </div>
+    </div>
+    <!-- Node 3: Resolution -->
+    <div class="flex flex-col items-center text-center space-y-space-xs">
+    <div class="w-12 h-12 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center text-on-surface group transition-transform hover:scale-105">
+    <span class="material-symbols-outlined text-[22px]">build_circle</span>
+    </div>
+    <div class="flex flex-col items-center">
+    <span class="font-label-md text-label-md text-on-surface font-semibold">Resolution</span>
+    <span class="mt-space-2xs px-space-xs py-space-2xs rounded-full bg-surface-container text-on-surface font-caption text-caption font-medium">Active</span>
+    </div>
+    </div>
+    <!-- Node 4: Escalation -->
+    <div class="flex flex-col items-center text-center space-y-space-xs">
+    <div class="w-12 h-12 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center text-outline group transition-transform hover:scale-105">
+    <span class="material-symbols-outlined text-[22px]">upgrade</span>
+    </div>
+    <div class="flex flex-col items-center">
+    <span class="font-label-md text-label-md text-on-surface font-semibold">Escalation</span>
+    <span class="mt-space-2xs px-space-xs py-space-2xs rounded-full bg-surface-container-high text-secondary font-caption text-caption font-medium">Standby</span>
+    </div>
+    </div>
+    </div>
+    <!-- Background Connector Line for Desktop -->
+    <div class="hidden sm:block absolute top-[2.25rem] left-[15%] right-[15%] h-0.5 bg-surface-variant z-0"></div>
+    </div>
+    
+    <!-- Terminal / Real-Time Log Container -->
+    <div class="flex flex-col rounded-xl overflow-hidden shadow-sm bg-inverse-surface text-inverse-on-surface">
+      <!-- Terminal Top Bar -->
+      <div class="bg-on-surface px-space-md py-space-xs flex items-center justify-between">
+        <div class="flex items-center gap-space-xs">
+          <span class="w-2.5 h-2.5 rounded-full bg-error inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-surface-dim inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-primary inline-block"></span>
+          <span class="ml-space-xs font-mono-code text-caption text-surface-container">agent-orchestrator.log</span>
+        </div>
+        <div class="flex items-center gap-space-xs font-mono-code text-caption text-tertiary-fixed">
+          <span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed animate-ping"></span>
+          <span>{% if result %}EXECUTION COMPLETE{% else %}STANDBY{% endif %}</span>
+        </div>
+      </div>
+
+      <!-- Terminal Body -->
+      <div class="p-space-base space-y-space-xs font-mono-code text-mono-code leading-relaxed">
+        {% if result and result.trace %}
+          {% for step in result.trace %}
+          <div class="flex items-start gap-space-sm">
+            <span class="text-outline shrink-0">Live</span>
+            <span class="px-space-xs rounded bg-primary text-on-primary font-medium shrink-0">{{ step.agent }}</span>
+            <span class="text-inverse-on-surface">{{ step.detail }}</span>
+          </div>
+          {% endfor %}
+          <div class="flex items-start gap-space-sm pt-space-xs border-t border-outline/20">
+            <span class="text-outline shrink-0">Urgency:</span>
+            <span class="text-tertiary-fixed-dim font-bold">{{ result.urgency }}</span>
+          </div>
+        {% else %}
+          <div class="flex items-start gap-space-sm">
+            <span class="text-outline shrink-0">10:30:00 AM</span>
+            <span class="px-space-xs rounded bg-surface-tint text-on-primary font-medium shrink-0">System</span>
+            <span class="text-inverse-on-surface">Awaiting input ticket for agent orchestration dispatch...</span>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    
+    <!-- Operational Telemetry Stats -->
+    <div class="grid grid-cols-3 gap-space-sm pt-space-2xs">
+    <div class="bg-surface-container-low rounded-xl p-space-sm flex flex-col justify-between">
+    <span class="font-caption text-caption text-secondary uppercase tracking-wider">Consensus</span>
+    <div class="flex items-baseline gap-space-xs mt-space-2xs">
+    <span class="font-headline-sm text-headline-sm text-primary font-bold">98.4%</span>
+    <span class="font-caption text-caption text-secondary">high</span>
+    </div>
+    </div>
+    <div class="bg-surface-container-low rounded-xl p-space-sm flex flex-col justify-between">
+    <span class="font-caption text-caption text-secondary uppercase tracking-wider">Latency</span>
+    <div class="flex items-baseline gap-space-xs mt-space-2xs">
+    <span class="font-headline-sm text-headline-sm text-on-surface font-bold">420ms</span>
+    <span class="font-caption text-caption text-secondary">p95</span>
+    </div>
+    </div>
+    <div class="bg-surface-container-low rounded-xl p-space-sm flex flex-col justify-between">
+    <span class="font-caption text-caption text-secondary uppercase tracking-wider">Threads</span>
+    <div class="flex items-baseline gap-space-xs mt-space-2xs">
+    <span class="font-headline-sm text-headline-sm text-tertiary font-bold">4</span>
+    <span class="font-caption text-caption text-secondary">co-op</span>
+    </div>
+    </div>
+    </div>
+    
+    <!-- Agent Activity Mini Sparkline (Inline SVG) -->
+    <div class="bg-surface-container-low rounded-xl p-space-sm flex items-center justify-between">
+    <div class="flex flex-col">
+    <span class="font-label-sm text-label-sm font-semibold text-on-surface">Real-Time Event Throughput</span>
+    <span class="font-caption text-caption text-secondary">Past 60 minutes aggregate load</span>
+    </div>
+    <div class="w-36 h-8">
+    <svg class="w-full h-full text-primary" fill="none" preserveaspectratio="none" viewbox="0 0 144 32">
+    <path d="M0 24L16 20L32 26L48 12L64 16L80 6L96 14L112 8L128 18L144 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+    <path d="M0 24L16 20L32 26L48 12L64 16L80 6L96 14L112 8L128 18L144 4V32H0Z" fill="currentColor" fill-opacity="0.1"></path>
+    </svg>
+    </div>
+    </div>
+
+  </form>
+</div>
+
+<!-- RIGHT COLUMN: Enterprise Integrations Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col space-y-space-lg">
+<!-- Card Header -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Enterprise Integrations</h2>
+<p class="font-caption text-caption text-secondary">Synchronized incident tracking &amp; automated notification</p>
+</div>
+</div>
+<!-- Live Sync Connected Chip -->
+<div class="flex items-center gap-space-xs px-space-sm py-space-2xs rounded-full bg-surface-container text-tertiary font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-medium">Live Sync Connected</span>
+</div>
+</div>
+
+<!-- Two Integration Status Cards (Always visible as status indicators) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-base">
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">view_kanban</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Jira Integration</span>
+<span class="font-caption text-caption text-secondary truncate">Connected • Ready</span>
+</div>
+</div>
+<span class="px-space-xs py-space-2xs rounded-full bg-surface-container text-primary font-caption text-caption font-semibold shrink-0">Active</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container text-on-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">mark_email_read</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Email Automation</span>
+<span class="font-caption text-caption text-secondary truncate">Connected • Ready</span>
+</div>
+</div>
+<span class="px-space-xs py-space-2xs rounded-full bg-surface-container text-tertiary font-caption text-caption font-semibold shrink-0">Active</span>
+</div>
+</div>
+
+<!-- CONDITIONAL BLOCK: Only show generated ticket & email preview after pipeline runs -->
+{% if result %}
+<!-- Linked Jira Ticket Card -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between pb-space-2xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">task_alt</span>
+<span class="font-label-md text-label-md font-bold text-on-surface">Jira Ticket Created</span>
+</div>
+<a class="inline-flex items-center gap-space-2xs font-caption text-caption text-primary hover:underline" href="#">
+<span>Open in Jira Cloud</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-space-sm grid grid-cols-2 sm:grid-cols-4 gap-space-sm">
+<div>
+<span class="font-caption text-caption text-secondary block">Ticket ID</span>
+<span class="font-mono-code text-mono-code font-bold text-primary">{{ result.ticket_id }}</span>
+</div>
+<div>
+<span class="font-caption text-caption text-secondary block">Status</span>
+<span class="inline-block mt-space-2xs px-space-xs py-space-2xs rounded-full bg-surface-container text-on-surface font-caption text-caption font-medium">In Progress</span>
+</div>
+<div>
+<span class="font-caption text-caption text-secondary block">Assignee</span>
+<div class="flex items-center gap-space-2xs mt-space-2xs">
+<span class="w-4 h-4 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-caption text-[9px] font-bold">AI</span>
+<span class="font-label-sm text-label-sm text-on-surface">Auto-Router</span>
+</div>
+</div>
+<div>
+<span class="font-caption text-caption text-secondary block">Priority</span>
+<span class="inline-block mt-space-2xs px-space-xs py-space-2xs rounded-full bg-error-container text-on-error-container font-caption text-caption font-semibold">{{ result.urgency }}</span>
+</div>
+</div>
+<div class="text-body-sm font-body-sm text-secondary bg-surface-container-lowest rounded-lg p-space-sm">
+<span class="font-medium text-on-surface">Summary: </span>
+{{ result.summary }}
+</div>
+</div>
+
+<!-- Email Notification Preview Card -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between pb-space-2xs">
+<div class="flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-tertiary">outgoing_mail</span>
+<span class="font-label-md text-label-md font-bold text-on-surface">Email Notification Sent</span>
+</div>
+<span class="font-caption text-caption text-secondary font-mono-code">Delivered • SMTP SSL</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-space-sm space-y-space-2xs font-mono-code text-caption text-on-surface">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="text-secondary font-sans font-medium">To:</span>
+<span class="text-on-surface font-semibold">{{ session.get('user_email', 'user@company.com') }}</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="text-secondary font-sans font-medium">Subject:</span>
+<span class="text-primary font-semibold">[SupportPilot] We've received your ticket {{ result.ticket_id }}</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-space-sm text-body-sm font-body-sm text-on-surface leading-relaxed">
+<p class="mb-space-xs">Hi {{ session.get('user_name', 'User') }},</p>
+<p class="text-secondary mb-space-xs">
+Your ticket regarding <span class="font-semibold text-on-surface">"{{ result.title }}"</span> has been classified and analyzed by our autonomous AI resolution engine.
+</p>
+<p class="text-secondary">
+{{ result.draft }}
+</p>
+</div>
+</div>
+{% else %}
+<!-- Placeholder State Before Submission -->
+<div class="bg-surface-container-low rounded-xl p-space-xl flex flex-col items-center justify-center text-center space-y-space-sm">
+<span class="material-symbols-outlined text-[36px] text-outline">pending_actions</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Awaiting Pipeline Execution</span>
+<span class="font-body-sm text-body-sm text-secondary">Submit a test ticket on the left to trigger autonomous agent routing, Jira ticket creation, and email dispatch.</span>
+</div>
+{% endif %}
+
+<!-- Card Action Footer -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-space-2xs text-caption font-caption text-secondary">
+<span class="material-symbols-outlined text-[14px]">sync</span>
+<span>Webhooks operational (4 endpoints)</span>
+</div>
+<button class="px-space-md py-space-xs rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-medium hover:bg-primary-container transition-all flex items-center gap-space-xs shadow-sm" type="button">
+<span>Test Orchestration Webhook</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+
+</div>
+<!-- Operational Health Footer Band -->
+<section class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-base">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Milestone 3 Automated Safeguards Active</h3>
+<p class="font-body-sm text-body-sm text-secondary">Tickets exceeding 90% AI certainty resolve automatically; edge failures trigger Tier-2 handoff.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<span class="px-space-sm py-space-xs rounded-lg bg-surface-container-low text-on-surface font-label-sm text-label-sm font-medium">
+    Audit Log: Verified
+  </span>
+<span class="px-space-sm py-space-xs rounded-lg bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+    Zero Escalation Latency
+  </span>
+</div>
+</section>
+</div></main></div></body></html>

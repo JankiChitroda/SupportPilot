@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response
+from flask import Flask, render_template, request, redirect, session, url_for, make_response
 from classifier import process_ticket
 from database import init_db, save_ticket, save_user, verify_user
 import time
@@ -194,5 +194,26 @@ def execute_resolution(ticket_id):
     
     return redirect(url_for("resolution"))
 
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
+from agent_workflow import run_multi_agent_pipeline
+
+@app.route("/milestone3_dashboard", methods=["GET", "POST"])
+@token_required
+def milestone3_dashboard():
+    pipeline_result = None
+    
+    if request.method == "POST":
+        title = request.form.get("title", "Automated Task")
+        description = request.form.get("description", "")
+        category = request.form.get("category", "Technical")
+        
+        # Execute the multi-agent pipeline
+        pipeline_result = run_multi_agent_pipeline(title, description, category)
+        
+    return render_template("multiAgent.html", result=pipeline_result)
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)

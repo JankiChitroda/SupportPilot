@@ -44,6 +44,19 @@ def init_db():
             solution_steps TEXT
         )
     """)
+
+    # 4. Agent Logs Table for Milestone 3 Multi-Agent Execution Traces
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS agent_logs (
+            log_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ticket_id INTEGER,
+            agent_name TEXT,
+            detail TEXT,
+            urgency TEXT,
+            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (ticket_id) REFERENCES tickets (id)
+        )
+    ''')
     
     # Seed sample SOPs if empty
     cursor.execute("SELECT COUNT(*) FROM knowledge_base")
@@ -70,6 +83,19 @@ def save_ticket(name, email, title, description, category, severity, priority):
         INSERT INTO tickets (name, email, title, description, category, severity, priority, status)
         VALUES (?, ?, ?, ?, ?, ?, ?, 'Open')
     ''', (name, email, title, description, category, severity, priority))
+    ticket_id = cursor.lastrowid
+    conn.commit()
+    conn.close()
+    return ticket_id
+
+def save_agent_log(ticket_id, agent_name, detail, urgency):
+    """Saves multi-agent execution steps and traces for Milestone 3."""
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO agent_logs (ticket_id, agent_name, detail, urgency)
+        VALUES (?, ?, ?, ?)
+    ''', (ticket_id, agent_name, detail, urgency))
     conn.commit()
     conn.close()
 
@@ -103,4 +129,4 @@ def verify_user(full_name, password):
 
 if __name__ == "__main__":
     init_db()
-    print("Database initialized successfully with users, tickets, and knowledge base tables!")
+    print("Database initialized successfully with users, tickets, knowledge base, and agent_logs tables!")
